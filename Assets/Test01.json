@@ -1,0 +1,21 @@
+{
+  "LocalizedStrings": {
+    "greeting_text": {
+      "DefaultValue": "Hi There!",
+      "Translations": {
+        "en": "Hi There!",
+        "fr": "Salut !",
+        "es": "¡Hola!"
+      }
+    },
+    "goodbye_text": {
+      "DefaultValue": "See You Next Time!",
+      "Translations": {
+        "en": "See You Next Time!",
+        "fr": "À la prochaine !",
+        "es": "¡Hasta la próxima!",
+        "de": "Bis zum nächsten Mal!"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:GameLocalizationManagerApp.ViewModels"
+             x:Class="GameLocalizationManagerApp.Views.JsonLoaderControl"
+             x:DataType="vm:JsonLoaderAreaViewModel">
+    
+    <StackPanel Spacing="10">
+            
+        <TextBlock>Localization JSON Path:</TextBlock>
+            
+        <DockPanel>
+            <Button Command="{Binding SelectFileCommand}" 
+                    DockPanel.Dock="Right" MinWidth="40" HorizontalContentAlignment="Center">...</Button>
+            <TextBox Text="{Binding JsonPath}" />
+        </DockPanel>
+        
+        <Button DockPanel.Dock="Right" HorizontalContentAlignment="Center">Load JSON</Button>
+            
+    </StackPanel>
+
+</UserControl>
