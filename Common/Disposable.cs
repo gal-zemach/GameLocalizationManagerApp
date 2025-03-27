@@ -1,5 +1,7 @@
 using System;
 
+namespace GameLocalizationManagerApp.Common;
+
 /// <summary>
 /// Simple IDisposable that can be created from an Action 
 /// </summary>

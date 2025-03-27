@@ -1,6 +1,9 @@
 using System;
 using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using GameLocalizationManagerApp.Common;
+
+namespace GameLocalizationManagerApp.Common;
 
 /// <summary>
 /// Extensions class for <see cref="ObservableObject"/>

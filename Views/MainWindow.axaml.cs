@@ -10,7 +10,7 @@ namespace GameLocalizationManagerApp.Views;
 
 public partial class MainWindow : Window
 {
-    private string m_LastFileDialogFolder;
+    private string? _lastFileDialogFolder;
     
     public MainWindow()
     {
@@ -47,7 +47,7 @@ public partial class MainWindow : Window
         // Use this window as the parent visual.
         var topLevel = TopLevel.GetTopLevel(this);
         var storageProvider = topLevel.StorageProvider;
-        var startingFolder = string.IsNullOrEmpty(m_LastFileDialogFolder) ? Directory.GetCurrentDirectory() : m_LastFileDialogFolder;
+        var startingFolder = string.IsNullOrEmpty(_lastFileDialogFolder) ? Directory.GetCurrentDirectory() : _lastFileDialogFolder;
         var startFolder = await storageProvider.TryGetFolderFromPathAsync(startingFolder);
         
         var jsonFileType = new FilePickerFileType("Only Json Files") 
@@ -65,7 +65,7 @@ public partial class MainWindow : Window
 
         if (files.Count > 0)
         {
-            m_LastFileDialogFolder = Path.GetDirectoryName(files[0].Path.AbsolutePath);
+            _lastFileDialogFolder = Path.GetDirectoryName(files[0].Path.AbsolutePath);
         }
         
         return files;

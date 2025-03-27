@@ -12,10 +12,10 @@ namespace GameLocalizationManagerApp.ViewModels;
 /// </summary>
 public partial class JsonLoaderAreaViewModel : ObservableObject
 {
-    public Func<Task<IReadOnlyList<IStorageFile>>> FileDialogRequested;
+    public Func<Task<IReadOnlyList<IStorageFile>>>? FileDialogRequested;
     
     [ObservableProperty]
-    private string? jsonPath;
+    private string? _jsonPath;
     
     [RelayCommand]
     private async Task SelectFileAsync()

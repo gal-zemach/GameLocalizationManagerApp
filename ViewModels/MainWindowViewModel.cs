@@ -1,4 +1,5 @@
 ﻿using System;
+using GameLocalizationManagerApp.Common;
 
 namespace GameLocalizationManagerApp.ViewModels;
 
@@ -13,12 +14,12 @@ public partial class MainWindowViewModel : ViewModelBase
     
     public EditEntryViewModel EditEntryViewModel { get; } = new();
 
-    private IDisposable m_JsonPathDisposable;
-    private IDisposable m_ChosenEntryDisposable;
+    private readonly IDisposable _jsonPathDisposable;
+    private readonly IDisposable _chosenEntryDisposable;
     
     public MainWindowViewModel()
     {
-        m_JsonPathDisposable = JsonLoaderAreaViewModel.SubscribeTo(nameof(JsonLoaderAreaViewModel.JsonPath),
+        _jsonPathDisposable = JsonLoaderAreaViewModel.SubscribeTo(nameof(JsonLoaderAreaViewModel.JsonPath),
             () => JsonLoaderAreaViewModel.JsonPath, 
             path => ViewDataAreaViewModel.LoadFile(path));
         
@@ -28,7 +29,7 @@ public partial class MainWindowViewModel : ViewModelBase
     
     ~MainWindowViewModel()
     {
-        m_JsonPathDisposable?.Dispose();
-        m_ChosenEntryDisposable?.Dispose();
+        _jsonPathDisposable?.Dispose();
+        _chosenEntryDisposable?.Dispose();
     }
 }
