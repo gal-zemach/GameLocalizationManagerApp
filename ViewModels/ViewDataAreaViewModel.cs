@@ -52,7 +52,8 @@ public partial class ViewDataAreaViewModel : ViewModelBase
     [RelayCommand (CanExecute = nameof(CanAddNewItem))]
     private void AddItem()
     {
-        Entries.Add(new LocalizationEntryViewModel(NewKeyToAdd, new LocalizedString()));
+        LocalizationData.LocalizedStrings.Add(NewKeyToAdd, new LocalizedString());
+        Entries.Add(new LocalizationEntryViewModel(NewKeyToAdd, LocalizationData.LocalizedStrings[NewKeyToAdd]));
         NewKeyToAdd = null;
     }
 

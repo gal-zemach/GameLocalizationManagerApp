@@ -31,13 +31,16 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Key"
                                         Binding="{Binding Key}" 
-                                        Width="*"/>
+                                        Width="*"
+                                        IsReadOnly="True"/>
                     <DataGridTextColumn Header="Default Value"
                                         Binding="{Binding DefaultValue}" 
-                                        Width="2*"/>
+                                        Width="2*"
+                                        IsReadOnly="True"/>
                     <DataGridTextColumn Header="Languages"
                                         Binding="{Binding LanguageCodes}" 
-                                        Width="*"/>
+                                        Width="*"
+                                        IsReadOnly="True"/>
                     <DataGridTemplateColumn Header=""
                                             Width="80">
                         <DataGridTemplateColumn.CellTemplate>
