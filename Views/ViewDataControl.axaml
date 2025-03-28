@@ -15,7 +15,7 @@
 
         <!-- File loaded -->
         <Grid IsVisible="{Binding IsDataLoaded}"
-              RowDefinitions="Auto, Auto, *, Auto"
+              RowDefinitions="Auto, *, Auto"
               x:Name="Root">
             
             <!-- File is empty -->
@@ -23,45 +23,36 @@
                        Text="File is empty" 
                        TextAlignment="Center" LineSpacing="20"/>
             
-            <!-- Table Headers -->
-            <Grid IsVisible="{Binding !IsDataEmpty}"
-                  Grid.Row="1" 
-                  ColumnDefinitions="*, 2*, *, 70">
-                <TextBlock Text="Key"/>
-                <TextBlock Text="Default Value" Grid.Column="1"/>
-                <TextBlock Text="Languages" Grid.Column="2"/>
-                <TextBlock Grid.Column="3"/>
-            </Grid>
-            
-            <!-- Each entry row -->
-            <ScrollViewer Grid.Row="2">
-                <ItemsControl ItemsSource="{Binding Entries}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="vm:LocalizationEntryViewModel">
-            
-                            <Grid ColumnDefinitions="*, 2*, *, 70">
-                                <TextBlock Text="{Binding Key}"/>
-            
-                                <TextBlock Text="{Binding DefaultValue}"
-                                           Grid.Column="1"/>
-            
-                                <TextBlock Text="{Binding LanguageCodes}"
-                                           Grid.Column="2"/>
-            
-                                <Button Command="{Binding #Root.((vm:ViewDataAreaViewModel)DataContext).RemoveItemCommand}"
-                                        CommandParameter="{Binding .}"
-                                        Grid.Column="3">
-                                    Delete
-                                </Button>
-                            </Grid>
-            
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+            <!-- Entries List -->
+            <DataGrid ItemsSource="{Binding Entries}"
+                      IsVisible="{Binding !IsDataEmpty}"
+                      AutoGenerateColumns="False"
+                      Grid.Row="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Key"
+                                        Binding="{Binding Key}" 
+                                        Width="*"/>
+                    <DataGridTextColumn Header="Default Value"
+                                        Binding="{Binding DefaultValue}" 
+                                        Width="2*"/>
+                    <DataGridTextColumn Header="Languages"
+                                        Binding="{Binding LanguageCodes}" 
+                                        Width="*"/>
+                    <DataGridTemplateColumn Header=""
+                                            Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete"
+                                        Command="{Binding #Root.((vm:ViewDataAreaViewModel)DataContext).RemoveItemCommand}"
+                                        CommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
             
             <!-- Add item -->
-            <TextBox Grid.Row="3"
+            <TextBox Grid.Row="1"
                      Text="{Binding NewKeyToAdd}"
                      Watermark="New Localization Key">
                 <TextBox.InnerRightContent>
