@@ -2,7 +2,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:GameLocalizationManagerApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="GameLocalizationManagerApp.Views.ViewDataControl">
-    View Json Content!
+             x:Class="GameLocalizationManagerApp.Views.ViewDataControl"
+             x:DataType="vm:ViewDataAreaViewModel">
+    
+    <StackPanel>
+        <!-- No file loaded -->
+        <TextBlock IsVisible="{Binding !IsDataLoaded}" 
+                   Text="Load a JSON file to view its content" 
+                   TextAlignment="Center"/>
+
+        <!-- File loaded -->
+        <Grid IsVisible="{Binding IsDataLoaded}"
+              RowDefinitions="Auto, Auto, *, Auto"
+              x:Name="Root">
+            
+            <!-- File is empty -->
+            <TextBlock IsVisible="{Binding IsDataEmpty}" 
+                       Text="File is empty" 
+                       TextAlignment="Center" LineSpacing="20"/>
+            
+            <!-- Table Headers -->
+            <Grid IsVisible="{Binding !IsDataEmpty}"
+                  Grid.Row="1" 
+                  ColumnDefinitions="*, 2*, *, 70">
+                <TextBlock Text="Key"/>
+                <TextBlock Text="Default Value" Grid.Column="1"/>
+                <TextBlock Text="Languages" Grid.Column="2"/>
+                <TextBlock Grid.Column="3"/>
+            </Grid>
+            
+            <!-- Each entry row -->
+            <ScrollViewer Grid.Row="2">
+                <ItemsControl ItemsSource="{Binding Entries}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="vm:LocalizationEntryViewModel">
+            
+                            <Grid ColumnDefinitions="*, 2*, *, 70">
+                                <TextBlock Text="{Binding Key}"/>
+            
+                                <TextBlock Text="{Binding DefaultValue}"
+                                           Grid.Column="1"/>
+            
+                                <TextBlock Text="{Binding LanguageCodes}"
+                                           Grid.Column="2"/>
+            
+                                <Button Command="{Binding #Root.((vm:ViewDataAreaViewModel)DataContext).RemoveItemCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Grid.Column="3">
+                                    Delete
+                                </Button>
+                            </Grid>
+            
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            
+            <!-- Add item -->
+            <TextBox Grid.Row="3"
+                     Text="{Binding NewKeyToAdd}"
+                     Watermark="New Localization Key">
+                <TextBox.InnerRightContent>
+                    <Button Command="{Binding AddItemCommand}">
+                        Add
+                    </Button>
+                </TextBox.InnerRightContent>
+                <TextBox.KeyBindings>
+                    <KeyBinding Command="{Binding AddItemCommand}" Gesture="Enter"/>
+                </TextBox.KeyBindings>
+            </TextBox>
+        </Grid>
+    </StackPanel>
+    
 </UserControl>

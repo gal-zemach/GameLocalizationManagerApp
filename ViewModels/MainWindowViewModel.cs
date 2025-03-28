@@ -14,14 +14,14 @@ public partial class MainWindowViewModel : ViewModelBase
     
     public EditEntryViewModel EditEntryViewModel { get; } = new();
 
-    private readonly IDisposable _jsonPathDisposable;
+    private readonly IDisposable _loadJsonDisposable;
     private readonly IDisposable _chosenEntryDisposable;
     
     public MainWindowViewModel()
     {
-        _jsonPathDisposable = JsonLoaderAreaViewModel.SubscribeTo(nameof(JsonLoaderAreaViewModel.JsonPath),
-            () => JsonLoaderAreaViewModel.JsonPath, 
-            path => ViewDataAreaViewModel.LoadFile(path));
+        _loadJsonDisposable = JsonLoaderAreaViewModel.SubscribeTo(nameof(JsonLoaderAreaViewModel.LocalizationData),
+            () => JsonLoaderAreaViewModel.LocalizationData, 
+            data => ViewDataAreaViewModel.LocalizationData = data);
         
         // Subscribe editEntry to viewData.OnEntryChosen
         // m_ChosenEntryDisposable = 
@@ -29,7 +29,7 @@ public partial class MainWindowViewModel : ViewModelBase
     
     ~MainWindowViewModel()
     {
-        _jsonPathDisposable?.Dispose();
+        _loadJsonDisposable?.Dispose();
         _chosenEntryDisposable?.Dispose();
     }
 }

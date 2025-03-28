@@ -14,10 +14,12 @@
         <DockPanel>
             <Button Command="{Binding SelectFileCommand}" 
                     DockPanel.Dock="Right" MinWidth="40" HorizontalContentAlignment="Center">...</Button>
+            
             <TextBox Text="{Binding JsonPath}" />
         </DockPanel>
         
-        <Button DockPanel.Dock="Right" HorizontalContentAlignment="Center">Load JSON</Button>
+        <Button Command="{Binding LoadJsonCommand}" 
+                DockPanel.Dock="Right" HorizontalContentAlignment="Center">Load JSON</Button>
             
     </StackPanel>
 
