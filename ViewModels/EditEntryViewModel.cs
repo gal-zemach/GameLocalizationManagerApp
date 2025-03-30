@@ -7,5 +7,6 @@ namespace GameLocalizationManagerApp.ViewModels;
 /// </summary>
 public partial class EditEntryViewModel : ViewModelBase
 {
-    
+    [ObservableProperty]
+    private LocalizationEntryViewModel? _selectedEntry;
 }

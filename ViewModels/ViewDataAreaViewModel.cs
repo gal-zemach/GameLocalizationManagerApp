@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GameLocalizationManagerApp.Models.Data;
@@ -38,6 +41,9 @@ public partial class ViewDataAreaViewModel : ViewModelBase
     
     [ObservableProperty]
     private bool _isDataEmpty;
+    
+    [ObservableProperty]
+    private LocalizationEntryViewModel _selectedEntry;
     
     [ObservableProperty] 
     [NotifyCanExecuteChangedFor(nameof(AddItemCommand))]

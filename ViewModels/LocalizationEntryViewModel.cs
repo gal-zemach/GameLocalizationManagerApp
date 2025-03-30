@@ -13,44 +13,28 @@ public partial class LocalizationEntryViewModel : ViewModelBase
     private string _key;
     
     [ObservableProperty]
-    private string _defaultValue;
-    
-    [ObservableProperty]
-    private Dictionary<string, string> _translations;
+    private LocalizedString _data;
 
-    public string LanguageCodes => Translations is not null ? string.Join(", ", Translations.Keys) : string.Empty;
+    public string LanguageCodes =>
+        Data.Translations is not null ? string.Join(", ", Data.Translations.Keys) : string.Empty;
     
     public LocalizationEntryViewModel(string key, LocalizedString value)
     {
         Key = key;
-        DefaultValue = value.DefaultValue;
-        Translations = value.Translations;
-    }
-
-    /// <summary>
-    /// Returns a <see cref="LocalizedString"/> with the ViewModel's value 
-    /// </summary>
-    /// <returns></returns>
-    public LocalizedString GetValue()
-    {
-        return new LocalizedString
-        {
-            DefaultValue = this.DefaultValue,
-            Translations = this.Translations
-        };
+        Data = value;
     }
     
-    public void AddTranslation(string lang, string value)
-    {
-        Translations[lang] = value;
-        OnPropertyChanged(nameof(LanguageCodes));
-    }
-
-    public void RemoveTranslation(string lang)
-    {
-        if (Translations.Remove(lang))
-        {
-            OnPropertyChanged(nameof(LanguageCodes));
-        }
-    }
+    // public void AddTranslation(string lang, string value)
+    // {
+    //     Translations[lang] = value;
+    //     OnPropertyChanged(nameof(LanguageCodes));
+    // }
+    //
+    // public void RemoveTranslation(string lang)
+    // {
+    //     if (Translations.Remove(lang))
+    //     {
+    //         OnPropertyChanged(nameof(LanguageCodes));
+    //     }
+    // }
 }

@@ -23,8 +23,9 @@ public partial class MainWindowViewModel : ViewModelBase
             () => JsonLoaderAreaViewModel.LocalizationData, 
             data => ViewDataAreaViewModel.LocalizationData = data);
         
-        // Subscribe editEntry to viewData.OnEntryChosen
-        // m_ChosenEntryDisposable = 
+        _chosenEntryDisposable = ViewDataAreaViewModel.SubscribeTo(nameof(ViewDataAreaViewModel.SelectedEntry), 
+            () => ViewDataAreaViewModel.SelectedEntry,
+            data => EditEntryViewModel.SelectedEntry = data);
     }
     
     ~MainWindowViewModel()

@@ -27,6 +27,8 @@
             <DataGrid ItemsSource="{Binding Entries}"
                       IsVisible="{Binding !IsDataEmpty}"
                       AutoGenerateColumns="False"
+                      SelectedItem="{Binding SelectedEntry}"
+                      Margin="0 0 0 5"
                       Grid.Row="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Key"
@@ -34,7 +36,7 @@
                                         Width="*"
                                         IsReadOnly="True"/>
                     <DataGridTextColumn Header="Default Value"
-                                        Binding="{Binding DefaultValue}" 
+                                        Binding="{Binding Data.DefaultValue}" 
                                         Width="2*"
                                         IsReadOnly="True"/>
                     <DataGridTextColumn Header="Languages"

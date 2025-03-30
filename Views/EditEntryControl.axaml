@@ -2,7 +2,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:GameLocalizationManagerApp.ViewModels"
+             xmlns:controls="clr-namespace:GameLocalizationManagerApp.Common.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="GameLocalizationManagerApp.Views.EditEntryControl">
-    Edit Single Json Entry!
+             x:Class="GameLocalizationManagerApp.Views.EditEntryControl"
+             x:DataType="vm:EditEntryViewModel">
+    
+    <Grid RowDefinitions="*, *, *, *">
+    
+        <!-- Key -->
+        <controls:LabeledControl Label="Key:" 
+                                 Margin="0 5">
+            <TextBox Text="{Binding SelectedEntry.Key}"/>
+        </controls:LabeledControl>
+        
+        <!-- Default Value -->
+        <controls:LabeledControl Label="Default Value:" 
+                                 Margin="0 5" Grid.Row="1">
+            <TextBox Text="{Binding SelectedEntry.Data.DefaultValue}"/>
+        </controls:LabeledControl>
+        
+        <!-- Translations dictionary -->
+        <controls:LabeledControl Label="Translations:" 
+                                 Margin="0 5" Grid.Row="2">
+            <DataGrid ItemsSource="{Binding SelectedEntry.Data.Translations}"
+                      AutoGenerateColumns="False"
+                      Margin="0 0 0 5">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Language"
+                                        Binding="{Binding Key}"
+                                        Width="Auto"
+                                        IsReadOnly="False"/>
+                    <DataGridTextColumn Header="Translation"
+                                        Binding="{Binding Value}"
+                                        Width="*"
+                                        IsReadOnly="False"/>
+                    <!-- <DataGridTemplateColumn Header="" -->
+                    <!--                         Width="80"> -->
+                    <!--     <DataGridTemplateColumn.CellTemplate> -->
+                    <!--         <DataTemplate> -->
+                    <!--             <Button Content="Delete" -->
+                    <!--                     Command="{Binding #Root.((vm:ViewDataAreaViewModel)DataContext).RemoveItemCommand}" -->
+                    <!--                     CommandParameter="{Binding .}" /> -->
+                    <!--         </DataTemplate> -->
+                    <!--     </DataGridTemplateColumn.CellTemplate> -->
+                    <!-- </DataGridTemplateColumn> -->
+                </DataGrid.Columns>
+            </DataGrid>
+        </controls:LabeledControl>
+        
+    </Grid>
 </UserControl>
