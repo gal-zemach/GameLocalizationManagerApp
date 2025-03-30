@@ -1,0 +1,19 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:GameLocalizationManagerApp.Common.Controls">
+
+    <Style Selector="controls|LabeledControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:LabeledControl">
+                    <StackPanel>
+                        <TextBlock Text="{TemplateBinding Label}" 
+                                   Margin="0 0 0 5"/>
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</Styles>
