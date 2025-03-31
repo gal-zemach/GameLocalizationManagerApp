@@ -30,11 +30,13 @@
             <!-- View Area -->
             <views:ViewDataControl Grid.Row="2"
                                    Margin="0 0 0 20"
-                                   DataContext="{Binding ViewDataAreaViewModel}"/>
+                                   DataContext="{Binding ViewDataAreaViewModel}"
+                                   IsVisible="{Binding IsDataLoaded}"/>
             
             <!-- Edit Area -->
             <views:EditEntryControl Grid.Row="3" 
-                                    DataContext="{Binding EditGroupViewModel}"/>
+                                    DataContext="{Binding EditGroupViewModel}"
+                                    IsVisible="{Binding IsGroupSelectedForEdit}"/>
         
         </Grid>
     </Border>

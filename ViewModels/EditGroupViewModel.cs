@@ -22,6 +22,9 @@ public partial class EditGroupViewModel : ValidatableViewModelBase
     }
     
     [ObservableProperty]
+    private bool _isGroupSelectedForEdit;
+    
+    [ObservableProperty]
     private string? _key;
     
     [ObservableProperty]
@@ -42,6 +45,7 @@ public partial class EditGroupViewModel : ValidatableViewModelBase
         set
         {
             _selectedGroup = value;
+            IsGroupSelectedForEdit = _selectedGroup != null;
             
             Key = value?.Key;
             DefaultValue = value?.Data.DefaultValue;

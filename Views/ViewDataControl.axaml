@@ -8,6 +8,11 @@
              x:DataType="vm:ViewDataAreaViewModel">
     
     <DockPanel>
+        <!-- Area Header -->
+        <TextBlock DockPanel.Dock="Top"
+                   Text="2. File Content"
+                   HorizontalAlignment="Left" Margin="0 5" FontSize="16" FontWeight="Bold"/>
+        
         <!-- No file loaded -->
         <TextBlock IsVisible="{Binding !IsDataLoaded}" 
                    Text="Load a JSON file to view its content" 
