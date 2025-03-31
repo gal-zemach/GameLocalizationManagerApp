@@ -7,6 +7,7 @@ namespace GameLocalizationManagerApp.ViewModels;
 
 /// <summary>
 /// A <see cref="ViewModelBase"/> class supporting adding errors to properties
+/// Referenced https://andydunkel.net/2023/02/02/avaloniaui-validation-in-viewmodel/
 /// </summary>
 public class ValidatableViewModelBase : ViewModelBase, INotifyDataErrorInfo
 {
