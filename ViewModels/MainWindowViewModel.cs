@@ -12,20 +12,22 @@ public partial class MainWindowViewModel : ViewModelBase
     
     public ViewDataAreaViewModel ViewDataAreaViewModel { get; } = new();
     
-    public EditEntryViewModel EditEntryViewModel { get; } = new();
+    public EditGroupViewModel EditGroupViewModel { get; }
 
     private readonly IDisposable _loadJsonDisposable;
     private readonly IDisposable _chosenEntryDisposable;
     
     public MainWindowViewModel()
     {
+        EditGroupViewModel = new EditGroupViewModel(ViewDataAreaViewModel.UpdateEntry);
+        
         _loadJsonDisposable = JsonLoaderAreaViewModel.SubscribeTo(nameof(JsonLoaderAreaViewModel.LocalizationData),
             () => JsonLoaderAreaViewModel.LocalizationData, 
             data => ViewDataAreaViewModel.LocalizationData = data);
         
-        _chosenEntryDisposable = ViewDataAreaViewModel.SubscribeTo(nameof(ViewDataAreaViewModel.SelectedEntry), 
-            () => ViewDataAreaViewModel.SelectedEntry,
-            data => EditEntryViewModel.SelectedEntry = data);
+        _chosenEntryDisposable = ViewDataAreaViewModel.SubscribeTo(nameof(ViewDataAreaViewModel.SelectedGroup), 
+            () => ViewDataAreaViewModel.SelectedGroup,
+            data => EditGroupViewModel.SelectedGroup = data);
     }
     
     ~MainWindowViewModel()

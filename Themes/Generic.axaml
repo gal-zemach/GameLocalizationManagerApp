@@ -6,11 +6,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:LabeledControl">
-                    <StackPanel>
-                        <TextBlock Text="{TemplateBinding Label}" 
-                                   Margin="0 0 0 5"/>
-                        <ContentPresenter Content="{TemplateBinding Content}"/>
-                    </StackPanel>
+                    <Grid RowDefinitions="Auto, *">
+                        <TextBlock Grid.Row="0"
+                                   Margin="0 0 0 5"
+                                   Text="{TemplateBinding Label}"/>
+                        <ContentPresenter Grid.Row="1" 
+                                          Content="{TemplateBinding Content}"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

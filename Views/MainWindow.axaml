@@ -17,22 +17,25 @@
     </Design.DataContext>
 
     <Border Padding="15">
-        <StackPanel>
+        <Grid RowDefinitions="Auto, Auto, *, 2*">
             
             <!-- Window Header -->
             <TextBlock HorizontalAlignment="Center" Margin="0 5" FontSize="18" FontWeight="Bold">Game Localization Manager</TextBlock>
         
             <!-- Json Loader Area -->
-            <views:JsonLoaderControl DataContext="{Binding JsonLoaderAreaViewModel}"/>
-            <Separator Opacity="0" Height="20"/>
+            <views:JsonLoaderControl Grid.Row="1"
+                                     Margin="0 0 0 20"
+                DataContext="{Binding JsonLoaderAreaViewModel}"/>
 
             <!-- View Area -->
-            <views:ViewDataControl DataContext="{Binding ViewDataAreaViewModel}"/>
-            <Separator Opacity="0" Height="20"/>
+            <views:ViewDataControl Grid.Row="2"
+                                   Margin="0 0 0 20"
+                                   DataContext="{Binding ViewDataAreaViewModel}"/>
             
             <!-- Edit Area -->
-            <views:EditEntryControl DataContext="{Binding EditEntryViewModel}"/>
+            <views:EditEntryControl Grid.Row="3" 
+                                    DataContext="{Binding EditGroupViewModel}"/>
         
-        </StackPanel>
+        </Grid>
     </Border>
 </Window>

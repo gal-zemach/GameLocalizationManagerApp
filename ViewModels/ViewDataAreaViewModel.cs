@@ -1,7 +1,6 @@
-using System.Collections.Generic;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GameLocalizationManagerApp.Models.Data;
@@ -16,7 +15,7 @@ public partial class ViewDataAreaViewModel : ViewModelBase
     /// <summary>
     /// ViewModels for each localization entry row
     /// </summary>
-    public ObservableCollection<LocalizationEntryViewModel> Entries { get; } = [];
+    public ObservableCollection<LocalizationGroup> Entries { get; } = [];
     
     /// <summary>
     /// The data presented in the window
@@ -43,7 +42,7 @@ public partial class ViewDataAreaViewModel : ViewModelBase
     private bool _isDataEmpty;
     
     [ObservableProperty]
-    private LocalizationEntryViewModel _selectedEntry;
+    private LocalizationGroup _selectedGroup;
     
     [ObservableProperty] 
     [NotifyCanExecuteChangedFor(nameof(AddItemCommand))]
@@ -59,14 +58,17 @@ public partial class ViewDataAreaViewModel : ViewModelBase
     private void AddItem()
     {
         LocalizationData.LocalizedStrings.Add(NewKeyToAdd, new LocalizedString());
-        Entries.Add(new LocalizationEntryViewModel(NewKeyToAdd, LocalizationData.LocalizedStrings[NewKeyToAdd]));
+        Entries.Add(new LocalizationGroup(NewKeyToAdd, LocalizationData.LocalizedStrings[NewKeyToAdd]));
         NewKeyToAdd = null;
+
+        UpdateDuplicateDelegates();
     }
 
     [RelayCommand]
-    private void RemoveItem(LocalizationEntryViewModel item)
+    private void RemoveItem(LocalizationGroup item)
     {
         Entries.Remove(item);
+        UpdateDuplicateDelegates();
     }
     
     private void SetToEntriesObservable(LocalizationData? newData)
@@ -79,7 +81,39 @@ public partial class ViewDataAreaViewModel : ViewModelBase
         
         foreach (var kvp in newData.LocalizedStrings)
         {
-            Entries.Add(new LocalizationEntryViewModel(kvp.Key, kvp.Value));
+            Entries.Add(new LocalizationGroup(kvp.Key, kvp.Value));
+        }
+
+        UpdateDuplicateDelegates();
+    }
+
+    /// <summary>
+    /// Allows updating an existing localization entry
+    /// </summary>
+    public void UpdateEntry(LocalizationGroup oldValue, LocalizationGroup newValue)
+    {
+        var index = Entries.IndexOf(oldValue);
+
+        try
+        {
+            Entries[index].Key = newValue.Key;
+            Entries[index].Data = newValue.Data;
+
+            UpdateDuplicateDelegates();
+        }
+        catch (ArgumentOutOfRangeException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    
+    private void UpdateDuplicateDelegates()
+    {
+        foreach (var entry in Entries)
+        {
+            entry.IsDuplicateKey = key =>
+                Entries.Any(other => other != entry && other.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

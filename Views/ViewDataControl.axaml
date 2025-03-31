@@ -7,27 +7,43 @@
              x:Class="GameLocalizationManagerApp.Views.ViewDataControl"
              x:DataType="vm:ViewDataAreaViewModel">
     
-    <StackPanel>
+    <DockPanel>
         <!-- No file loaded -->
         <TextBlock IsVisible="{Binding !IsDataLoaded}" 
                    Text="Load a JSON file to view its content" 
-                   TextAlignment="Center"/>
+                   TextAlignment="Center"
+                   DockPanel.Dock="Top"/>
 
         <!-- File loaded -->
-        <Grid IsVisible="{Binding IsDataLoaded}"
-              RowDefinitions="Auto, *, Auto"
+        <DockPanel IsVisible="{Binding IsDataLoaded}"
               x:Name="Root">
             
             <!-- File is empty -->
             <TextBlock IsVisible="{Binding IsDataEmpty}" 
                        Text="File is empty" 
-                       TextAlignment="Center" LineSpacing="20"/>
+                       TextAlignment="Center" LineSpacing="20"
+                       DockPanel.Dock="Top"/>
+            
+            <!-- Add item -->
+            <TextBox Grid.Row="1"
+                     DockPanel.Dock="Bottom"
+                     Text="{Binding NewKeyToAdd}"
+                     Watermark="New Localization Group">
+                <TextBox.InnerRightContent>
+                    <Button Command="{Binding AddItemCommand}">
+                        Add
+                    </Button>
+                </TextBox.InnerRightContent>
+                <TextBox.KeyBindings>
+                    <KeyBinding Command="{Binding AddItemCommand}" Gesture="Enter"/>
+                </TextBox.KeyBindings>
+            </TextBox>
             
             <!-- Entries List -->
             <DataGrid ItemsSource="{Binding Entries}"
                       IsVisible="{Binding !IsDataEmpty}"
                       AutoGenerateColumns="False"
-                      SelectedItem="{Binding SelectedEntry}"
+                      SelectedItem="{Binding SelectedGroup}"
                       Margin="0 0 0 5"
                       Grid.Row="0">
                 <DataGrid.Columns>
@@ -56,20 +72,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             
-            <!-- Add item -->
-            <TextBox Grid.Row="1"
-                     Text="{Binding NewKeyToAdd}"
-                     Watermark="New Localization Key">
-                <TextBox.InnerRightContent>
-                    <Button Command="{Binding AddItemCommand}">
-                        Add
-                    </Button>
-                </TextBox.InnerRightContent>
-                <TextBox.KeyBindings>
-                    <KeyBinding Command="{Binding AddItemCommand}" Gesture="Enter"/>
-                </TextBox.KeyBindings>
-            </TextBox>
-        </Grid>
-    </StackPanel>
+        </DockPanel>
+    </DockPanel>
     
 </UserControl>

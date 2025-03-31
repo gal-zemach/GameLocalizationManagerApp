@@ -4,19 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:GameLocalizationManagerApp.ViewModels"
+             xmlns:controls="clr-namespace:GameLocalizationManagerApp.Common.Controls"
              x:Class="GameLocalizationManagerApp.Views.JsonLoaderControl"
              x:DataType="vm:JsonLoaderAreaViewModel">
     
     <StackPanel Spacing="10">
             
-        <TextBlock>Localization JSON Path:</TextBlock>
+        <controls:LabeledControl Label="Localization JSON Path:">
+            <DockPanel>
+                <Button Command="{Binding SelectFileCommand}" 
+                        DockPanel.Dock="Right" MinWidth="40" HorizontalContentAlignment="Center">...</Button>
             
-        <DockPanel>
-            <Button Command="{Binding SelectFileCommand}" 
-                    DockPanel.Dock="Right" MinWidth="40" HorizontalContentAlignment="Center">...</Button>
-            
-            <TextBox Text="{Binding JsonPath}" />
-        </DockPanel>
+                <TextBox Text="{Binding JsonPath}" />
+            </DockPanel>
+        </controls:LabeledControl>
         
         <Button Command="{Binding LoadJsonCommand}" 
                 DockPanel.Dock="Right" HorizontalContentAlignment="Center">Load JSON</Button>
