@@ -8,7 +8,7 @@ namespace GameLocalizationManagerApp.ViewModels;
 /// </summary>
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public JsonLoaderAreaViewModel JsonLoaderAreaViewModel { get; } = new();
+    public JsonLoaderAreaViewModel JsonLoaderAreaViewModel { get; }
     
     public ViewDataAreaViewModel ViewDataAreaViewModel { get; } = new();
     
@@ -19,6 +19,7 @@ public partial class MainWindowViewModel : ViewModelBase
     
     public MainWindowViewModel()
     {
+        JsonLoaderAreaViewModel = new JsonLoaderAreaViewModel(ViewDataAreaViewModel.GetLocalizationData);
         EditGroupViewModel = new EditGroupViewModel(ViewDataAreaViewModel.UpdateEntry);
         
         _loadJsonDisposable = JsonLoaderAreaViewModel.SubscribeTo(nameof(JsonLoaderAreaViewModel.LocalizationData),

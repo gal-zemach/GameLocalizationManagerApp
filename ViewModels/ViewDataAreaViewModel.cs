@@ -47,6 +47,15 @@ public partial class ViewDataAreaViewModel : ViewModelBase
     [ObservableProperty] 
     [NotifyCanExecuteChangedFor(nameof(AddItemCommand))]
     private string? _newKeyToAdd;
+
+    /// <summary>
+    /// Returns the View Model's current data
+    /// </summary>
+    public LocalizationData GetLocalizationData()
+    {
+        return new LocalizationData
+            { LocalizedStrings = Entries.ToDictionary(entry => entry.Key, entry => entry.Data) };
+    }
     
     private bool CanAddNewItem => !string.IsNullOrEmpty(NewKeyToAdd) && 
                                   LocalizationData != null && !LocalizationData.LocalizedStrings.ContainsKey(NewKeyToAdd);

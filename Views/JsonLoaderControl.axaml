@@ -19,8 +19,13 @@
             </DockPanel>
         </controls:LabeledControl>
         
-        <Button Command="{Binding LoadJsonCommand}" 
-                DockPanel.Dock="Right" HorizontalContentAlignment="Center">Load JSON</Button>
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Right">
+            <Button Command="{Binding LoadJsonCommand}" 
+                    HorizontalContentAlignment="Center">Load JSON</Button>
+            <Button Command="{Binding SaveJsonCommand}" 
+                    HorizontalContentAlignment="Center">Save JSON</Button>
+        </StackPanel>
             
     </StackPanel>
 

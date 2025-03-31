@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GameLocalizationManagerApp.Models;
 using GameLocalizationManagerApp.Models.Data;
 
 namespace GameLocalizationManagerApp.ViewModels;
@@ -15,13 +16,27 @@ namespace GameLocalizationManagerApp.ViewModels;
 /// </summary>
 public partial class JsonLoaderAreaViewModel : ViewModelBase
 {
+    private Func<LocalizationData>? _getDataToSave;
+    
+    public JsonLoaderAreaViewModel(Func<LocalizationData> getDataToSaveFunc)
+    {
+        _getDataToSave = getDataToSaveFunc;
+    }
+    
+    /// <summary>
+    /// Invoked when this class requests that the file dialog open
+    /// </summary>
     public Func<Task<IReadOnlyList<IStorageFile>>>? FileDialogRequested;
     
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(LoadJsonCommand), nameof(SaveJsonCommand))]
     private string? _jsonPath;
     
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveJsonCommand))]
     private LocalizationData? _localizationData;
+
+    private bool DataWasLoaded => LocalizationData != null;
     
     [RelayCommand]
     private async Task SelectFileAsync()
@@ -36,23 +51,20 @@ public partial class JsonLoaderAreaViewModel : ViewModelBase
         }
     }
 
-    [RelayCommand]
-    private void LoadJson()
+    private bool CanLoadJson => !string.IsNullOrWhiteSpace(JsonPath);
+    
+    [RelayCommand(CanExecute = nameof(CanLoadJson))]
+    private async Task LoadJson()
     {
-        if (_jsonPath == null)
-        {
-            return;
-        }
-        
-        try
-        {
-            var jsonContent = File.ReadAllText(_jsonPath);
-            LocalizationData = JsonSerializer.Deserialize<LocalizationData>(jsonContent) ?? LocalizationData;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        LocalizationData = await LocalizationManagerFileService.LoadJsonFile<LocalizationData>(JsonPath);
+    }
+    
+    private bool CanSaveJson => !string.IsNullOrWhiteSpace(JsonPath) && DataWasLoaded;
+    
+    [RelayCommand(CanExecute = nameof(CanSaveJson))]
+    private async Task SaveJson()
+    {
+        var dataToSave = _getDataToSave?.Invoke();
+        await LocalizationManagerFileService.SaveJsonFile(JsonPath, dataToSave);
     }
 }
