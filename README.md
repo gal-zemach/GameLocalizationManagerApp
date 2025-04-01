@@ -1,4 +1,4 @@
-# Game Localization Manager
+# Game Localization Manager App
 
 A desktop application (built with [Avalonia](https://avaloniaui.net/)) designed to help manage localization keys, default strings, and per-language translations for game projects. 
 It allows you to **load** a JSON file, **view** and **edit** existing localization data, **create** new localization entries, and **save** everything back to JSON.
@@ -6,7 +6,7 @@ It allows you to **load** a JSON file, **view** and **edit** existing localizati
 This was built as my first Avalonia app, trying to learn the syntax and practice MVVM.
 
 
-![Game Localization Manager UI](./path/to/screenshot.png)
+<img src="./Assets/DemoGif/AppScreens.gif" alt="Game Localization Manager UI" width="400"/>
 
 ## Table of Contents
 - [Features](#features)
