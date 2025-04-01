@@ -6,7 +6,7 @@ It allows you to **load** a JSON file, **view** and **edit** existing localizati
 This was built as my first Avalonia app, trying to learn the syntax and practice MVVM.
 
 
-<img src="./Assets/DemoGif/AppScreens.gif" alt="Game Localization Manager UI" width="400"/>
+<img src="./Assets/DemoGif/AppScreens.gif" alt="Game Localization Manager UI" width="700"/>
 
 ## Table of Contents
 - [Features](#features)
