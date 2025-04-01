@@ -3,7 +3,7 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace GameLocalizationManagerApp.Models;
+namespace GameLocalizationManagerApp.Services;
 
 public static class LocalizationManagerFileService
 {

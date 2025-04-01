@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using GameLocalizationManagerApp.Models;
 using GameLocalizationManagerApp.Models.Data;
+using GameLocalizationManagerApp.Services;
 
 namespace GameLocalizationManagerApp.ViewModels;
 

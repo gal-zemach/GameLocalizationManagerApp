@@ -5,7 +5,7 @@
              xmlns:vm="clr-namespace:GameLocalizationManagerApp.ViewModels"
              xmlns:controls="clr-namespace:GameLocalizationManagerApp.Common.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="GameLocalizationManagerApp.Views.EditEntryControl"
+             x:Class="GameLocalizationManagerApp.Views.EditGroupControl"
              x:DataType="vm:EditGroupViewModel">
     
     <Grid RowDefinitions="Auto, Auto, Auto, *, Auto, Auto"

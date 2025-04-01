@@ -34,7 +34,7 @@
                                    IsVisible="{Binding IsDataLoaded}"/>
             
             <!-- Edit Area -->
-            <views:EditEntryControl Grid.Row="3" 
+            <views:EditGroupControl Grid.Row="3" 
                                     DataContext="{Binding EditGroupViewModel}"
                                     IsVisible="{Binding IsGroupSelectedForEdit}"/>
         
