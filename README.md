@@ -38,9 +38,6 @@ This was built as my first Avalonia app, trying to learn the syntax and practice
 5. **Save Back to JSON**
     - When changes are made, save them to the JSON file to keep everything up-to-date.
 
-6. **Dark Theme UI** (as seen in the screenshot)
-    - Designed with a dark color scheme that is friendly for extended use.
-
 ---
 
 ## Technologies Used
