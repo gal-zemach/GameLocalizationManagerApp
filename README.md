@@ -102,7 +102,7 @@ This was built as my first Avalonia app, trying to learn the syntax and practice
 GameLocalizationManagerApp/
 │
 ├─ Assets/
-│   └─ Test01.json           # Sample JSON file
+│   └─ Sample.json           # Sample JSON file
 │
 ├─ Models/
 │   └─ Data
